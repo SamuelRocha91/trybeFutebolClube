@@ -13,5 +13,5 @@ const TeamModel: TeamSequelizeModelCreator = db.define('Team', {
   timestamps: false,
   underscored: true,
 });
- 
+
 export default TeamModel;

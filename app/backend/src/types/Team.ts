@@ -1,4 +1,4 @@
 export type Team = {
-    id: number,
-    team_name: string,
-  };
+  id: number,
+  teamName: string,
+};

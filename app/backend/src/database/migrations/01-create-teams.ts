@@ -13,9 +13,10 @@ export default {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      team_name: {
+      teamName: {
         allowNull: false,
         type: DataTypes.STRING,
+        field: 'team_name',
       },
     }) 
   }, 

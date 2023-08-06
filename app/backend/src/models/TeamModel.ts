@@ -17,6 +17,6 @@ export default class TeamModel implements ITeamModel {
     const dbData = await this.model.findByPk(id);
     if (dbData === null) return null;
     const { teamName }: ITeam = dbData;
-    return { id, teamName }
+    return { id, teamName };
   }
 }

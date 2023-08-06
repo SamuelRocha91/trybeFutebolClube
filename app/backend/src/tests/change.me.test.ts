@@ -19,9 +19,18 @@ const { expect } = chai;
 describe('GET /teams', function () { 
   beforeEach(function () { sinon.restore(); });
  it('Verifica se ao fazer uma requisição corretamente para o endpoint "/teams" se o retorno é o esperado', async () => {
-  sinon.stub(SequelizeTeam, 'findAll').resolves(team.teams as any);
+  sinon.stub(SequelizeTeam, 'findOne').resolves(team.teams as any);
 
   const { status, body } = await chai.request(app).get('/teams');
+
+  expect(status).to.equal(200);
+  expect(body).to.deep.equal(team.teams);
+ });
+
+ it('Verifica se ao fazer uma requisição corretamente para o endpoint "/teams/:id" se o retorno é o esperado', async () => {
+  sinon.stub(SequelizeTeam, 'findAll').resolves(team.teams as any);
+
+  const { status, body } = await chai.request(app).get('/teams/1');
 
   expect(status).to.equal(200);
   expect(body).to.deep.equal(team.teams);

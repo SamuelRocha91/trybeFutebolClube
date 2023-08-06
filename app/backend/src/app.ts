@@ -1,7 +1,6 @@
 import * as express from 'express';
 import router from './routes';
 
-
 class App {
   public app: express.Express;
 
@@ -19,8 +18,8 @@ class App {
   private routes(): void {
     this.app.use(router);
   }
-  
-  private config():void {
+
+  private config(): void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
@@ -41,5 +40,3 @@ export { App };
 
 // Essa segunda exportação é estratégica, e a execução dos testes de cobertura depende dela
 export const { app } = new App();
-
-app.get('/teams', )

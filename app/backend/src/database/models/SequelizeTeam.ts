@@ -1,4 +1,3 @@
-
 import {
   DataTypes,
   Model,
@@ -26,7 +25,6 @@ SequelizeTeam.init({
     type: DataTypes.STRING(30),
     allowNull: false,
   },
- 
 }, {
   sequelize: db,
   modelName: 'teams',

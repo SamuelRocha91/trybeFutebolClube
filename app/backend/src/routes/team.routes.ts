@@ -1,5 +1,3 @@
-// src/routes/book.routes.ts
-
 import { Request, Router, Response } from 'express';
 import TeamController from '../controllers/TeamController';
 

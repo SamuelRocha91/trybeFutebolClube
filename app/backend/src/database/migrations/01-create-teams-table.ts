@@ -1,5 +1,3 @@
-// src/database/migrations/01-create-books-table.ts
-
 import { Model, QueryInterface, DataTypes } from 'sequelize';
 import { ITeam } from '../../Interfaces/ITeam';
 export default {
@@ -14,7 +12,7 @@ export default {
       teamName: {
         type: DataTypes.STRING,
         allowNull: false,
-        field: 'team_name',
+        field: 'team_name'
       },
     });
   },

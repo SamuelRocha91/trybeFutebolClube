@@ -1,4 +1,6 @@
 import * as express from 'express';
+import router from './routes';
+
 
 class App {
   public app: express.Express;
@@ -8,10 +10,16 @@ class App {
 
     this.config();
 
+    this.routes();
+
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
+  private routes(): void {
+    this.app.use(router);
+  }
+  
   private config():void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
@@ -33,3 +41,5 @@ export { App };
 
 // Essa segunda exportação é estratégica, e a execução dos testes de cobertura depende dela
 export const { app } = new App();
+
+app.get('/teams', )

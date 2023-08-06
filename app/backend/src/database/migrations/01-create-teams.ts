@@ -1,27 +1,24 @@
-// src/database/migrations/01-create-users.ts
+// src/database/migrations/01-create-books-table.ts
 
-import { Model, QueryInterface, DataTypes } from 'sequelize'; 
-
- import { Team } from '../../types/Team';
-
-export default { 
-  up(queryInterface: QueryInterface) { 
-    return queryInterface.createTable<Model<Team>>('teams', { 
+import { Model, QueryInterface, DataTypes } from 'sequelize';
+import { ITeam } from '../../Interfaces/ITeam';
+export default {
+  up(queryInterface: QueryInterface) {
+    return queryInterface.createTable<Model<ITeam>>('teams', {
       id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
       },
       teamName: {
-        allowNull: false,
         type: DataTypes.STRING,
+        allowNull: false,
         field: 'team_name',
       },
-    }) 
-  }, 
-  
-  down(queryInterface: QueryInterface) { 
-    return queryInterface.dropTable('teams') 
-  } 
+    });
+  },
+  down(queryInterface: QueryInterface) {
+    return queryInterface.dropTable('teams');
+  },
 };

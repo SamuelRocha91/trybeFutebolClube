@@ -4,11 +4,13 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Example from '../database/models/ExampleModel';
 
-import { Response } from 'superagent';
-import teamModel from '../database/models/team.model'
-import mockTeam from './mocks/team.mock';
+import SequelizeTeam from '../database/models/SequelizeTeam';
+
+import team from './mocks/Team.mocks';
+
+import teamModel from '../models/TeamModel'
+import mockTeam from './mocks/Team.mocks';
 
 chai.use(chaiHttp);
 
@@ -17,15 +19,12 @@ const { expect } = chai;
 describe('GET /teams', function () { 
   beforeEach(function () { sinon.restore(); });
  it('Verifica se ao fazer uma requisição corretamente para o endpoint "/teams" se o retorno é o esperado', async () => {
-  const mockFindAllReturn = teamModel.bulkBuild(mockTeam.validGetTeam);
-    sinon.stub(teamModel, 'findAll').resolves(mockFindAllReturn);
+  sinon.stub(SequelizeTeam, 'findAll').resolves(team.teams as any);
 
-    // Act
-    const httpResponse = await chai.request(app).get('/teams');
+  const { status, body } = await chai.request(app).get('/teams');
 
-    // Assert
-    expect(httpResponse.status).to.equal(200);
-    expect(httpResponse.body).to.deep.equal(mockFindAllReturn)
+  expect(status).to.equal(200);
+  expect(body).to.deep.equal(team.teams);
  })
 });
 

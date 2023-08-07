@@ -41,7 +41,7 @@ SequelizeUser.init({
   },
   password: {
     type: DataTypes.STRING(50),
-},
+  },
 }, {
   sequelize: db,
   modelName: 'users',

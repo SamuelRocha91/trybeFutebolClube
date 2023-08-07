@@ -11,6 +11,7 @@ import team from './mocks/Team.mocks';
 
 import teamModel from '../models/TeamModel'
 import mockTeam from './mocks/Team.mocks';
+import mockLogin from './mocks/Login.mocks';
 
 chai.use(chaiHttp);
 
@@ -35,6 +36,29 @@ describe('GET /teams', function () {
   expect(status).to.equal(200);
   expect(body).to.deep.equal(team.teams);
  })
+ 
+});
+
+describe('POST /login', function () { 
+  beforeEach(function () { sinon.restore(); });
+ it('Verifica se é possível fazer login quando as credenciais forem válidas', async () => {
+  const response = await chai.request(app).post('/login').send(mockLogin.loginData);
+
+  expect(response.status).to.equal(200);
+  expect(response.body).to.haveOwnProperty('token')
+ });
+
+ it('Verifica se o login não fornecer o email se é possível dar continuidade', async () => {
+  const response = await chai.request(app).post('/login').send(mockLogin.loginDataWithinEmail);
+
+  expect(response.status).to.equal(400);
+ });
+
+ it('Verifica se o login não fornecer o password se é possível dar continuidade', async () => {
+  const response = await chai.request(app).post('/login').send(mockLogin.loginDataWithinPassword);
+
+  expect(response.status).to.equal(400);
+ });
 });
 
 

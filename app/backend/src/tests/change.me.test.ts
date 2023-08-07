@@ -36,11 +36,7 @@ describe('GET /teams', function () {
   expect(status).to.equal(200);
   expect(body).to.deep.equal(team.teams);
  })
- 
-});
 
-describe('POST /login', function () { 
-  beforeEach(function () { sinon.restore(); });
  it('Verifica se é possível fazer login quando as credenciais forem válidas', async () => {
   const response = await chai.request(app).post('/login').send(mockLogin.loginData);
 
@@ -52,13 +48,17 @@ describe('POST /login', function () {
   const response = await chai.request(app).post('/login').send(mockLogin.loginDataWithinEmail);
 
   expect(response.status).to.equal(400);
+  expect(response.body).to.deep.equal({ "message": "All fields must be filled" });
+
  });
 
  it('Verifica se o login não fornecer o password se é possível dar continuidade', async () => {
   const response = await chai.request(app).post('/login').send(mockLogin.loginDataWithinPassword);
 
   expect(response.status).to.equal(400);
+  expect(response.body).to.deep.equal({ "message": "All fields must be filled" });
  });
+ 
 });
 
 

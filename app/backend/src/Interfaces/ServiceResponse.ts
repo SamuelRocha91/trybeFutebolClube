@@ -1,5 +1,3 @@
-// src/interfaces/ServiceResponse.ts
-
 export type ServiceMessage = { message: string };
 
 type ServiceResponseErrorType = 'INVALID_DATA' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'CONFLICT';

@@ -1,6 +1,4 @@
-import { ILogin } from '../../Interfaces/ILogin';
-
-const loginData: ILogin = {
+const loginData = {
     email: 'samuel@hotmail.com',
     password: '1234567'
 }

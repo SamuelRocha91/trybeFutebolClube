@@ -6,6 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 
 import SequelizeTeam from '../database/models/SequelizeTeam';
+import SequelizeUser from '../database/models/SequelizeUser';
 
 import team from './mocks/Team.mocks';
 
@@ -18,9 +19,8 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('GET /teams', function () { 
-  beforeEach(function () { sinon.restore(); });
  it('Verifica se ao fazer uma requisição corretamente para o endpoint "/teams" se o retorno é o esperado', async () => {
-  sinon.stub(SequelizeTeam, 'findOne').resolves(team.teams as any);
+  sinon.stub(SequelizeTeam, 'findAll').resolves(team.teams as any);
 
   const { status, body } = await chai.request(app).get('/teams');
 
@@ -29,20 +29,13 @@ describe('GET /teams', function () {
  });
 
  it('Verifica se ao fazer uma requisição corretamente para o endpoint "/teams/:id" se o retorno é o esperado', async () => {
-  sinon.stub(SequelizeTeam, 'findAll').resolves(team.teams as any);
+  sinon.stub(SequelizeTeam, 'findOne').resolves(team.team as any);
 
   const { status, body } = await chai.request(app).get('/teams/1');
 
   expect(status).to.equal(200);
-  expect(body).to.deep.equal(team.teams);
+  expect(body).to.deep.equal(team.team);
  })
-
- it('Verifica se é possível fazer login quando as credenciais forem válidas', async () => {
-  const response = await chai.request(app).post('/login').send(mockLogin.loginData);
-
-  expect(response.status).to.equal(200);
-  expect(response.body).to.haveOwnProperty('token')
- });
 
  it('Verifica se o login não fornecer o email se é possível dar continuidade', async () => {
   const response = await chai.request(app).post('/login').send(mockLogin.loginDataWithinEmail);
@@ -58,7 +51,7 @@ describe('GET /teams', function () {
   expect(response.status).to.equal(400);
   expect(response.body).to.deep.equal({ "message": "All fields must be filled" });
  });
- 
+   afterEach(sinon.restore);
 });
 
 

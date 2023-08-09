@@ -1,11 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
+import { Response, Request, NextFunction } from 'express';
 
 class Validations {
   static validateLogin(req: Request, res: Response, next: NextFunction): Response | void {
     const login = req.body;
-    const requiredKeys = ['email', 'password'];
-    const notFoundKey = requiredKeys.find((key) => !(key in login));
-    if (notFoundKey) {
+    if (!login.password || !login.email) {
       return res.status(400).json({ message: 'All fields must be filled' });
     }
     const emailRegex = /\S+@\S+\.\S+/;

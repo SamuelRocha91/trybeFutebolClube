@@ -10,4 +10,9 @@ export default class JwtUtils {
   sign(payload: Identifiable): string {
     return jwt.sign(payload, this.jwtSecret);
   }
+
+  decodeToken(token: string): Identifiable {
+    const decoded = jwt.verify(token, this.jwtSecret);
+    return decoded as Identifiable;
+  }
 }

@@ -24,4 +24,25 @@ export default class AuthController {
     const token = this.jwtUtils.sign({ id: user.id });
     return res.status(200).json({ token });
   }
+
+  public async role(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
+    const data = authorization.split(' ');
+    if (data.length !== 2) {
+      return res.status(401).json({
+        message: 'Token must be a valid token',
+      });
+    }
+    try {
+      const info = this.jwtUtils.decodeToken(data[1]);
+      const user = await this.userModel.findById(Number(info.id));
+      if (!user) throw new Error('user invalid');
+      return res.status(200).json({ role: user.role });
+    } catch (error) {
+      res.status(401).json({ message: 'Token must be a valid token' });
+    }
+  }
 }

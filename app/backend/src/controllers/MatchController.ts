@@ -3,11 +3,17 @@ import MatchService from '../service/MatchService';
 
 export default class MatchController {
   constructor(
-    private bookService = new MatchService(),
+    private matchService = new MatchService(),
   ) { }
 
   public async getAllMatches(req: Request, res: Response) {
-    const serviceResponse = await this.bookService.getAllMatches();
-    res.status(201).json(serviceResponse.data);
+    const { inProgress } = req.query;
+    if (inProgress === undefined) {
+      const serviceResponse = await this.matchService.getAllMatches();
+      return res.status(201).json(serviceResponse.data);
+    }
+    const bool = inProgress === 'true';
+    const serviceResponse = await this.matchService.getMatchesByInProgress(bool);
+    return res.status(201).json(serviceResponse.data);
   }
 }

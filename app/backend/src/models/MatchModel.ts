@@ -13,4 +13,13 @@ export default class MatchModel implements IMatchModel {
     }, { model: SequelizeTeam, as: 'awayTeam' }] });
     return dbData;
   }
+
+  async findByInProgress(bool: boolean): Promise<IMatch[]> {
+    const dbData = await this.model.findAll({ where: { inProgress: bool },
+      include: [{
+        model: SequelizeTeam,
+        as: 'homeTeam',
+      }, { model: SequelizeTeam, as: 'awayTeam' }] });
+    return dbData;
+  }
 }

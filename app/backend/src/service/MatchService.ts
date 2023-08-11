@@ -12,4 +12,9 @@ export default class MatchService {
     const allBooks = await this.matchModel.findAll();
     return { status: 'SUCCESSFUL', data: allBooks };
   }
+
+  public async getMatchesByInProgress(bool: boolean): Promise<ServiceResponse<IMatch[]>> {
+    const allMatchesFiltered = await this.matchModel.findByInProgress(bool);
+    return { status: 'SUCCESSFUL', data: allMatchesFiltered };
+  }
 }

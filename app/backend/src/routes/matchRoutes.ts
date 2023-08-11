@@ -10,4 +10,9 @@ router.get(
   (req: Request, res: Response) => matchController.getAllMatches(req, res),
 );
 
+router.patch(
+  '/:id/finish',
+  (req: Request, res: Response) => matchController.finishMatchInProgress(req, res),
+);
+
 export default router;

@@ -1,5 +1,5 @@
 import MatchModel from '../models/MatchModel';
-import { ServiceResponse } from '../Interfaces/ServiceResponse';
+import { ServiceMessage, ServiceResponse } from '../Interfaces/ServiceResponse';
 import { IMatch } from '../Interfaces/IMatch';
 import { IMatchModel } from '../Interfaces/IMatchModel';
 
@@ -16,5 +16,12 @@ export default class MatchService {
   public async getMatchesByInProgress(bool: boolean): Promise<ServiceResponse<IMatch[]>> {
     const allMatchesFiltered = await this.matchModel.findByInProgress(bool);
     return { status: 'SUCCESSFUL', data: allMatchesFiltered };
+  }
+
+  public async updateMatchById(id: number): Promise<ServiceResponse<ServiceMessage>> {
+    const mactchUpdated = await this.matchModel.updateMatch(id);
+    if (!mactchUpdated) return { status: 'NOT_FOUND', data: { message: `Book ${id} not found` } };
+
+    return { status: 'SUCCESSFUL', data: { message: 'Book updated' } };
   }
 }

@@ -32,9 +32,7 @@ export default class AuthController {
     }
     const data = authorization.split(' ');
     if (data.length !== 2) {
-      return res.status(401).json({
-        message: 'Token must be a valid token',
-      });
+      return res.status(401).json({ message: 'Token must be a valid token' });
     }
     try {
       const info = this.jwtUtils.decodeToken(data[1]);

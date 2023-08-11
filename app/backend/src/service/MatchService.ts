@@ -24,4 +24,19 @@ export default class MatchService {
 
     return { status: 'SUCCESSFUL', data: { message: 'Book updated' } };
   }
+
+  public async updateMatchInProgress(
+    id: number,
+    match: IMatch,
+  ): Promise<ServiceResponse<ServiceMessage>> {
+    const matchFound = await this.matchModel.findById(id);
+    if (!matchFound) return { status: 'NOT_FOUND', data: { message: `Match ${id} not found` } };
+
+    const updatedMatch = await this.matchModel.updateMatchScore(id, match);
+    if (!updatedMatch) {
+      return { status: 'CONFLICT',
+        data: { message: `There are no updates to perform in match ${id}` } };
+    }
+    return { status: 'SUCCESSFUL', data: { message: 'Match updated' } };
+  }
 }

@@ -1,4 +1,5 @@
 import { Response, Request, NextFunction } from 'express';
+import MatchModel from '../models/MatchModel';
 
 const TOKEN_NOT_FOUND = 'Token not found';
 const TOKEN_MUST_BE_VALID = 'Token must be a valid token';

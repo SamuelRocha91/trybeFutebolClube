@@ -3,9 +3,6 @@ import MatchService from '../service/MatchService';
 import JwtUtils from '../utils/Jwt';
 import mapStatusHTTP from '../utils/mapStatusHTTP';
 
-const TOKEN_NOT_FOUND = 'Token not found';
-const TOKEN_MUST_BE_VALID = 'Token must be a valid token'
-
 export default class MatchController {
   private jwtUtils = new JwtUtils();
 
@@ -25,32 +22,12 @@ export default class MatchController {
   }
 
   public async finishMatchInProgress(req: Request, res: Response) {
-    const { authorization } = req.headers;
-    if (!authorization) {
-      return res.status(401).json({ message: TOKEN_NOT_FOUND });
-    }
-    const data = authorization.split(' ');
-    if (data.length !== 2) {
-      return res.status(401).json({ message: TOKEN_MUST_BE_VALID });
-    } try {
-      const { id } = req.params;
-      const match = await this.matchService.updateMatchById(Number(id));
-      if (!match) throw new Error('user invalid');
-      return res.status(200).json({ message: 'Finished' });
-    } catch (error) {
-      res.status(401).json({ message: TOKEN_MUST_BE_VALID });
-    }
+    const { id } = req.params;
+    await this.matchService.updateMatchById(Number(id));
+    return res.status(200).json({ message: 'Finished' });
   }
 
   public async updateMatchInProgress(req: Request, res: Response) {
-    const { authorization } = req.headers;
-    if (!authorization) {
-      return res.status(401).json({ message: TOKEN_NOT_FOUND });
-    }
-    const info = authorization.split(' ');
-    if (info.length !== 2) {
-      return res.status(401).json({ message: TOKEN_MUST_BE_VALID });
-    }
     const { id } = req.params;
     const data = req.body;
     const match = await this.matchService.updateMatchInProgress(Number(id), data);
@@ -58,5 +35,11 @@ export default class MatchController {
       return res.status(mapStatusHTTP(match.status)).json(match.data);
     }
     return res.status(200).json(match.data);
+  }
+
+  public async createMatchInProgress(req: Request, res: Response) {
+    const data = req.body;
+    const serviceResponse = await this.matchService.createMatch(data);
+    res.status(201).json(serviceResponse.data);
   }
 }

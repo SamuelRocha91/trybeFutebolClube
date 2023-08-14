@@ -14,17 +14,16 @@ export default class LeaderboardController {
     const matchList = await this.matchModel.findByInProgress(false);
     const leaderboard = teamList.map(({ id, teamName }) => ({
       name: teamName,
-      totalGames: GenerateLeaderboard.totalGames(matchList, id),
-      goalsFavor: GenerateLeaderboard.goalsFavor(matchList, id),
-      goalsOwn: GenerateLeaderboard.goalsOwn(matchList, id),
+      totalGames: GenerateLeaderboard.totalGamesHome(matchList, id),
+      goalsFavor: GenerateLeaderboard.goalsFavor(matchList, id, '/home'),
+      goalsOwn: GenerateLeaderboard.goalsOwn(matchList, id, '/home'),
       goalsBalance: GenerateLeaderboard
-        .goalsFavor(matchList, id) - GenerateLeaderboard.goalsOwn(matchList, id),
-      totalVictories: GenerateLeaderboard.totalVictories(matchList, id),
-      totalLosses: GenerateLeaderboard.totalLosses(matchList, id),
-      totalDraws: GenerateLeaderboard.totalDraws(matchList, id),
+        .goalsFavor(matchList, id, '/home') - GenerateLeaderboard.goalsOwn(matchList, id, '/home'),
+      totalVictories: GenerateLeaderboard.totalVictoriesHome(matchList, id),
+      totalLosses: GenerateLeaderboard.totalLossesHome(matchList, id),
+      totalDraws: GenerateLeaderboard.totalDrawsHome(matchList, id),
       totalPoints: GenerateLeaderboard.totalPoints(matchList, id),
-      efficiency: (GenerateLeaderboard.totalPoints(matchList, id)
-        / (GenerateLeaderboard.totalGames(matchList, id) * 3)) / 100 }));
+      efficiency: GenerateLeaderboard.efficiency(matchList, id) }));
     const orderedMatches = GenerateLeaderboard.orderMatches(leaderboard);
     return res.status(200).json(orderedMatches);
   }

@@ -2,27 +2,27 @@ import { ILeaderboard } from '../Interfaces/ILeaderboard';
 import { IMatch } from '../Interfaces/IMatch';
 
 export default class GenerateLeaderboard {
-  static goalsFavor(Matches: IMatch[], id: number): number {
+  static goalsFavor(Matches: IMatch[], id: number, route: string): number {
     return Matches.reduce((acc: number, curr:IMatch) => {
-      if (curr.awayTeamId === id) {
+      if (curr.awayTeamId === id && route === '/away') {
         const sum = acc + curr.awayTeamGoals;
         return sum;
       }
-      if (curr.homeTeamId === id) {
-        const sum = acc + curr.awayTeamGoals;
-        return sum;
-      }
-      return acc;
-    }, 0);
-  }
-
-  static goalsOwn(Matches: IMatch[], id: number): number {
-    return Matches.reduce((acc: number, curr:IMatch) => {
-      if (curr.awayTeamId === id) {
+      if (curr.homeTeamId === id && route === '/home') {
         const sum = acc + curr.homeTeamGoals;
         return sum;
       }
-      if (curr.homeTeamId === id) {
+      return acc;
+    }, 0);
+  }
+
+  static goalsOwn(Matches: IMatch[], id: number, route: string): number {
+    return Matches.reduce((acc: number, curr:IMatch) => {
+      if (curr.awayTeamId === id && route === '/away') {
+        const sum = acc + curr.homeTeamGoals;
+        return sum;
+      }
+      if (curr.homeTeamId === id && route === '/home') {
         const sum = acc + curr.awayTeamGoals;
         return sum;
       }
@@ -30,9 +30,9 @@ export default class GenerateLeaderboard {
     }, 0);
   }
 
-  static totalGames(Matches: IMatch[], id: number): number {
+  static totalGamesHome(Matches: IMatch[], id: number): number {
     return Matches.reduce((acc: number, curr:IMatch) => {
-      if (curr.awayTeamId === id || curr.homeTeamId === id) {
+      if (curr.homeTeamId === id) {
         const sum = acc + 1;
         return sum;
       }
@@ -40,39 +40,30 @@ export default class GenerateLeaderboard {
     }, 0);
   }
 
-  static totalVictories(Matches: IMatch[], id: number): number {
+  static totalVictoriesHome(Matches: IMatch[], id: number): number {
     let victories = 0;
-    Matches.forEach(({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals }) => {
+    Matches.forEach(({ homeTeamId, homeTeamGoals, awayTeamGoals }) => {
       if (homeTeamId === id && homeTeamGoals > awayTeamGoals) {
-        victories += 1;
-      }
-      if (awayTeamId === id && homeTeamGoals > awayTeamGoals) {
         victories += 1;
       }
     });
     return victories;
   }
 
-  static totalDraws(Matches: IMatch[], id: number): number {
+  static totalDrawsHome(Matches: IMatch[], id: number): number {
     let draw = 0;
-    Matches.forEach(({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals }) => {
+    Matches.forEach(({ homeTeamId, homeTeamGoals, awayTeamGoals }) => {
       if (homeTeamId === id && homeTeamGoals === awayTeamGoals) {
-        draw += 1;
-      }
-      if (awayTeamId === id && homeTeamGoals === awayTeamGoals) {
         draw += 1;
       }
     });
     return draw;
   }
 
-  static totalLosses(Matches: IMatch[], id: number): number {
+  static totalLossesHome(Matches: IMatch[], id: number): number {
     let losses = 0;
-    Matches.forEach(({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals }) => {
+    Matches.forEach(({ homeTeamId, homeTeamGoals, awayTeamGoals }) => {
       if (homeTeamId === id && homeTeamGoals < awayTeamGoals) {
-        losses += 1;
-      }
-      if (awayTeamId === id && awayTeamGoals < homeTeamGoals) {
         losses += 1;
       }
     });
@@ -80,7 +71,7 @@ export default class GenerateLeaderboard {
   }
 
   static totalPoints(Matches: IMatch[], id: number): number {
-    const points = (this.totalVictories(Matches, id) * 3) + this.totalDraws(Matches, id);
+    const points = (this.totalVictoriesHome(Matches, id) * 3) + this.totalDrawsHome(Matches, id);
     return points;
   }
 
@@ -97,10 +88,10 @@ export default class GenerateLeaderboard {
     });
   }
 
-  static orderByEfficiency(Leaderboard: ILeaderboard[]): ILeaderboard[] {
+  static orderByGoalsBalance(Leaderboard: ILeaderboard[]): ILeaderboard[] {
     return Leaderboard.sort((a: ILeaderboard, b: ILeaderboard) => {
       if (a.totalPoints === b.totalPoints && a.totalVictories === b.totalVictories) {
-        return a.efficiency > b.efficiency ? -1 : 0;
+        return a.goalsBalance > b.goalsBalance ? -1 : 0;
       }
       return 0;
     });
@@ -116,11 +107,17 @@ export default class GenerateLeaderboard {
     });
   }
 
+  static efficiency(Matches: IMatch[], id: number): number {
+    const efficiency = ((this.totalPoints(Matches, id)
+        / (this.totalGamesHome(Matches, id) * 3)) * 100).toFixed(2);
+    return Number(efficiency);
+  }
+
   static orderMatches(Leaderboard: ILeaderboard[]): ILeaderboard[] {
     const orderedByPoints = this.orderByTotalPoints(Leaderboard);
     const orderedByVictories = this.orderByTotalVictories(orderedByPoints);
-    const orderedByEfficiency = this.orderByEfficiency(orderedByVictories);
-    const orderedByGoals = this.orderByGoalsFavor(orderedByEfficiency);
+    const orderedByGoalsBalance = this.orderByGoalsBalance(orderedByVictories);
+    const orderedByGoals = this.orderByGoalsFavor(orderedByGoalsBalance);
     return orderedByGoals;
   }
 }

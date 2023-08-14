@@ -40,10 +40,30 @@ export default class GenerateLeaderboard {
     }, 0);
   }
 
+  static totalGamesAway(Matches: IMatch[], id: number): number {
+    return Matches.reduce((acc: number, curr:IMatch) => {
+      if (curr.awayTeamId === id) {
+        const sum = acc + 1;
+        return sum;
+      }
+      return acc;
+    }, 0);
+  }
+
   static totalVictoriesHome(Matches: IMatch[], id: number): number {
     let victories = 0;
     Matches.forEach(({ homeTeamId, homeTeamGoals, awayTeamGoals }) => {
       if (homeTeamId === id && homeTeamGoals > awayTeamGoals) {
+        victories += 1;
+      }
+    });
+    return victories;
+  }
+
+  static totalVictoriesAway(Matches: IMatch[], id: number): number {
+    let victories = 0;
+    Matches.forEach(({ awayTeamId, homeTeamGoals, awayTeamGoals }) => {
+      if (awayTeamId === id && homeTeamGoals < awayTeamGoals) {
         victories += 1;
       }
     });
@@ -60,6 +80,16 @@ export default class GenerateLeaderboard {
     return draw;
   }
 
+  static totalDrawsAway(Matches: IMatch[], id: number): number {
+    let draw = 0;
+    Matches.forEach(({ awayTeamId, homeTeamGoals, awayTeamGoals }) => {
+      if (awayTeamId === id && homeTeamGoals === awayTeamGoals) {
+        draw += 1;
+      }
+    });
+    return draw;
+  }
+
   static totalLossesHome(Matches: IMatch[], id: number): number {
     let losses = 0;
     Matches.forEach(({ homeTeamId, homeTeamGoals, awayTeamGoals }) => {
@@ -70,8 +100,23 @@ export default class GenerateLeaderboard {
     return losses;
   }
 
+  static totalLossesAway(Matches: IMatch[], id: number): number {
+    let losses = 0;
+    Matches.forEach(({ awayTeamId, homeTeamGoals, awayTeamGoals }) => {
+      if (awayTeamId === id && homeTeamGoals > awayTeamGoals) {
+        losses += 1;
+      }
+    });
+    return losses;
+  }
+
   static totalPoints(Matches: IMatch[], id: number): number {
     const points = (this.totalVictoriesHome(Matches, id) * 3) + this.totalDrawsHome(Matches, id);
+    return points;
+  }
+
+  static totalPointsAway(Matches: IMatch[], id: number): number {
+    const points = (this.totalVictoriesAway(Matches, id) * 3) + this.totalDrawsAway(Matches, id);
     return points;
   }
 
@@ -110,6 +155,12 @@ export default class GenerateLeaderboard {
   static efficiency(Matches: IMatch[], id: number): number {
     const efficiency = ((this.totalPoints(Matches, id)
         / (this.totalGamesHome(Matches, id) * 3)) * 100).toFixed(2);
+    return Number(efficiency);
+  }
+
+  static efficiencyAway(Matches: IMatch[], id: number): number {
+    const efficiency = ((this.totalPointsAway(Matches, id)
+        / (this.totalGamesAway(Matches, id) * 3)) * 100).toFixed(2);
     return Number(efficiency);
   }
 

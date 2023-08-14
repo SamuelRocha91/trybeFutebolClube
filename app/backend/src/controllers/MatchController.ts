@@ -50,7 +50,6 @@ export default class MatchController {
     if (awayTeam === null || homeTeam === null) {
       return res.status(404).json({ message: 'There is no team with such id!' });
     }
-   
     const serviceResponse = await this.matchService.createMatch(data);
     res.status(201).json(serviceResponse.data);
   }

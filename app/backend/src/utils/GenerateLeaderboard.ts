@@ -148,4 +148,34 @@ export default class GenerateLeaderboard {
     });
     return order;
   }
+
+  static totalGames(matchList: IMatch[], id: number) {
+    return this.totalGamesAway(matchList, id) + this.totalGamesHome(matchList, id);
+  }
+
+  static totalGoalsFavor(matchList: IMatch[], id: number) {
+    return this.goalsFavor(matchList, id, '/away') + this.goalsFavor(matchList, id, '/home');
+  }
+
+  static totalGoalsOwn(matchList: IMatch[], id: number) {
+    return this.goalsOwn(matchList, id, '/away') + this.goalsOwn(matchList, id, '/home');
+  }
+
+  static generalGoalsBalance(matchList: IMatch[], id: number) {
+    return this.totalGoalsFavor(matchList, id) - this.totalGoalsOwn(matchList, id);
+  }
+
+  static points(matchList: IMatch[], id: number) {
+    return this.totalPoints(matchList, id) + this.totalPointsAway(matchList, id);
+  }
+
+  static generalEfficiency(matchList: IMatch[], id: number) {
+    const efficiency = ((this.points(matchList, id)
+      / (this.totalGames(matchList, id) * 3)) * 100).toFixed(2);
+    return Number(efficiency);
+  }
+
+  static totalVictories(matchList: IMatch[], id: number) {
+    return this.totalVictoriesAway(matchList, id) + this.totalVictoriesHome(matchList, id);
+  }
 }

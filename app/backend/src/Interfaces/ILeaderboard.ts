@@ -4,6 +4,7 @@ export interface ILeaderboard {
   totalGames: number,
   totalVictories: number,
   totalLosses: number,
+  totalDraws: number,
   goalsFavor: number,
   goalsOwn: number,
   goalsBalance: number,

@@ -46,4 +46,25 @@ export default class LeaderboardController {
     const orderedMatches = GenerateLeaderboard.orderMatches(leaderboard);
     return res.status(200).json(orderedMatches);
   }
+
+  public async getLeaderBoard(req: Request, res: Response) {
+    const teamList = await this.teamModel.findAll();
+    const matchList = await this.matchModel.findByInProgress(false);
+    const leaderboard = teamList.map(({ id, teamName }) => ({
+      name: teamName,
+      totalGames: GenerateLeaderboard.totalGames(matchList, id),
+      goalsFavor: GenerateLeaderboard.totalGoalsFavor(matchList, id),
+      goalsOwn: GenerateLeaderboard.totalGoalsOwn(matchList, id),
+      goalsBalance: GenerateLeaderboard.generalGoalsBalance(matchList, id),
+      totalVictories: GenerateLeaderboard.totalVictories(matchList, id),
+      totalLosses: GenerateLeaderboard.totalLossesAway(matchList, id)
+        + GenerateLeaderboard.totalLossesHome(matchList, id),
+      totalDraws: GenerateLeaderboard.totalDrawsAway(matchList, id)
+        + GenerateLeaderboard.totalDrawsHome(matchList, id),
+      totalPoints: GenerateLeaderboard.totalPointsAway(matchList, id)
+        + GenerateLeaderboard.totalPoints(matchList, id),
+      efficiency: GenerateLeaderboard.generalEfficiency(matchList, id) }));
+    const orderedMatches = GenerateLeaderboard.orderMatches(leaderboard);
+    return res.status(200).json(orderedMatches);
+  }
 }

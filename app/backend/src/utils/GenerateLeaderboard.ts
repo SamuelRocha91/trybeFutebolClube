@@ -120,38 +120,6 @@ export default class GenerateLeaderboard {
     return points;
   }
 
-  static orderByTotalPoints(Leaderboard: ILeaderboard[]): ILeaderboard[] {
-    return Leaderboard.sort((a: ILeaderboard, b: ILeaderboard) => b.totalPoints - a.totalPoints);
-  }
-
-  static orderByTotalVictories(Leaderboard: ILeaderboard[]): ILeaderboard[] {
-    return Leaderboard.sort((a: ILeaderboard, b: ILeaderboard) => {
-      if (a.totalPoints === b.totalPoints) {
-        return a.totalVictories > b.totalVictories ? -1 : 0;
-      }
-      return 0;
-    });
-  }
-
-  static orderByGoalsBalance(Leaderboard: ILeaderboard[]): ILeaderboard[] {
-    return Leaderboard.sort((a: ILeaderboard, b: ILeaderboard) => {
-      if (a.totalPoints === b.totalPoints && a.totalVictories === b.totalVictories) {
-        return a.goalsBalance > b.goalsBalance ? -1 : 0;
-      }
-      return 0;
-    });
-  }
-
-  static orderByGoalsFavor(Leaderboard: ILeaderboard[]): ILeaderboard[] {
-    return Leaderboard.sort((a: ILeaderboard, b: ILeaderboard) => {
-      if (a.totalPoints === b.totalPoints
-        && a.totalVictories === b.totalVictories && a.efficiency === b.efficiency) {
-        return a.goalsFavor > b.goalsFavor ? -1 : 0;
-      }
-      return 0;
-    });
-  }
-
   static efficiency(Matches: IMatch[], id: number): number {
     const efficiency = ((this.totalPoints(Matches, id)
         / (this.totalGamesHome(Matches, id) * 3)) * 100).toFixed(2);
@@ -165,10 +133,19 @@ export default class GenerateLeaderboard {
   }
 
   static orderMatches(Leaderboard: ILeaderboard[]): ILeaderboard[] {
-    const orderedByPoints = this.orderByTotalPoints(Leaderboard);
-    const orderedByVictories = this.orderByTotalVictories(orderedByPoints);
-    const orderedByGoalsBalance = this.orderByGoalsBalance(orderedByVictories);
-    const orderedByGoals = this.orderByGoalsFavor(orderedByGoalsBalance);
-    return orderedByGoals;
+    const order = Leaderboard.sort((a, b) => {
+      if (a.totalPoints === b.totalPoints && a.totalVictories === b.totalVictories
+        && a.goalsBalance === b.goalsBalance) {
+        return b.goalsFavor - a.goalsFavor;
+      }
+      if (a.totalPoints === b.totalPoints && a.totalVictories === b.totalVictories) {
+        return b.goalsBalance - a.goalsBalance;
+      }
+      if (a.totalPoints === b.totalPoints) {
+        return b.totalVictories - a.totalVictories;
+      }
+      return b.totalPoints - a.totalPoints;
+    });
+    return order;
   }
 }

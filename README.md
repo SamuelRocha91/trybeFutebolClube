@@ -1,4 +1,4 @@
-<h1>Projeto Trybe Futebol CLube</h1>
+<h1>Projeto Trybe Futebol Clube</h1>
 <p>Trata-se de um projeto avaliativo desenvolvido no módulo de Backend do curso de Desenvolvimento Web da Trybe. Destacam-se como competências desenvolvidas: </p>
  <ol>
   <li>Manipular Docker;</li>

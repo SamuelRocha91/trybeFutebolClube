@@ -1,10 +1,9 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+<h1>Projeto Trybe Futebol CLube</h1>
+<p>Trata-se de um projeto avaliativo desenvolvido no módulo de Backend do curso de Desenvolvimento Web da Trybe. Destacam-se como competências desenvolvidas: </p>
+ <ol>
+  <li>Manipular Docker;</li>
+  <li>Manipular rotas;</li>
+  <li>Manipular testes de integração;</li>
+</ol>
+<p>A aplicação consiste num site gerenciador de um sistema de jogos de futebol através de um backend dockerizado e modelado com Sequelize. </p>
+

@@ -61,7 +61,7 @@
   1. Clona el repositorio:
 
      ```bash
-     git clone <URL_DEL_REPOSITORIO>
+     git clone git@github.com:SamuelRocha91/trybeFutebolClube.git
      cd trybe-futebol-clube
      ```
 

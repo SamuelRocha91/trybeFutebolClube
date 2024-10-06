@@ -61,7 +61,7 @@
   1. 克隆仓库：
 
      ```bash
-     git clone <仓库_URL>
+     git clone git@github.com:SamuelRocha91/trybeFutebolClube.git
      cd trybe-futebol-clube
      ```
 

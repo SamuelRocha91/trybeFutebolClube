@@ -1,85 +1,97 @@
-# <img src="https://agenciars.com.br/wp-content/uploads/2022/06/Trybe.png" alt="Trybe Logo" width="52" height="30" /> Trybe 足球俱乐部
-<img src="https://agenciars.com.br/wp-content/uploads/2022/06/Trybe.png" alt="Trybe Logo" width="52" height="30" />
+# <img src="https://cdn-icons-png.flaticon.com/128/5968/5968322.png" alt="Node Logo" width="52" height="30" /> Trybe Futebol Clube <img src="https://cdn-icons-png.flaticon.com/128/5968/5968322.png" alt="Node Logo" width="52" height="30" />
 
 ## 🌐 [![Português](https://img.shields.io/badge/Português-green)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README.md) [![Español](https://img.shields.io/badge/Español-yellow)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_es.md) [![English](https://img.shields.io/badge/English-blue)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_en.md) [![Русский](https://img.shields.io/badge/Русский-lightgrey)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_ru.md) [![中文](https://img.shields.io/badge/中文-red)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_ch.md) [![العربية](https://img.shields.io/badge/العربية-orange)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_ar.md)
 
 ![应用程序预览](./capturaEnpoint.png)
 
-## 描述
+<details>
+  <summary><h2>📄 描述</h2></summary>
 
-**Trybe 足球俱乐部** 是一个足球比赛管理应用程序，作为 Trybe 网络开发课程的后端模块的一部分开发。该项目允许用户以简单有效的方式管理比赛、球队和积分榜，利用强大且容器化的后端。
+  **Trybe Futebol Clube** 是一款足球比赛管理应用，作为 Trybe 网络开发课程后端模块的一部分开发。该项目使用户能够以简单高效的方式管理比赛、球队和排名，采用强大的 Docker 化后端。
 
-## 功能
+</details>
 
-- **比赛管理**：创建、更新和结束正在进行的比赛。
-- **球队管理**：注册和操作足球队的信息。
-- **登录系统**：用户认证以确保数据安全和完整性。
-- **积分榜**：以易于理解的格式检索球队的积分信息。
+<details>
+  <summary><h2>✨ 功能</h2></summary>
 
-## 使用的技术
+  - **比赛管理**：创建、更新和结束正在进行的比赛。
+  - **球队管理**：注册和处理有关足球队的信息。
+  - **登录系统**：用户身份验证以确保数据的安全性和完整性。
+  - **排名**：以易于理解的格式获取球队的排名信息。
 
-- **Node.js**：用于服务器端执行的 JavaScript 运行时。
-- **Express**：构建 RESTful API 的框架。
-- **Sequelize**：用于数据库操作的 ORM（对象关系映射）。
-- **Docker**：用于容器化应用程序，方便配置和依赖管理。
-- **TypeScript**：用于静态类型，提高代码质量和可维护性。
+</details>
 
-## 路由结构
+<details>
+  <summary><h2>🛠️ 使用的技术</h2></summary>
 
-API 有以下路由：
+  - **Node.js**：用于服务器端 JavaScript 的执行环境。
+  - **Express**：构建 RESTful API 的框架。
+  - **Sequelize**：用于数据库操作的 ORM（对象关系映射）。
+  - **Docker**：用于应用的容器化，简化配置和依赖管理。
+  - **TypeScript**：用于静态类型检查，提高代码质量和可维护性。
 
-- **球队**
-  - `GET /teams`：检索所有球队。
-  - `POST /teams`：创建新球队。
+</details>
 
-- **登录**
-  - `POST /login`：验证用户。
+<details>
+  <summary><h2>📑 路由结构</h2></summary>
 
-- **比赛**
-  - `GET /matches`：检索所有比赛。
-  - `POST /matches`：创建新比赛。
-  - `PATCH /matches/:id`：更新进行中的比赛。
-  - `PATCH /matches/:id/finish`：结束进行中的比赛。
+  API 具有以下路由：
 
-- **积分榜**
-  - `GET /leaderboard`：检索球队的积分。
+  - **球队**
+    - `GET /teams`：获取所有球队。
+    - `POST /teams`：创建新球队。
 
-## 安装
+  - **登录**
+    - `POST /login`：进行用户身份验证。
 
-1. 克隆仓库：
+  - **比赛**
+    - `GET /matches`：获取所有比赛。
+    - `POST /matches`：创建新比赛。
+    - `PATCH /matches/:id`：更新正在进行的比赛。
+    - `PATCH /matches/:id/finish`：结束正在进行的比赛。
 
-   ```bash
-   git clone <仓库_URL>
-   cd trybe-futebol-clube
-   ```
+  - **排名**
+    - `GET /leaderboard`：获取球队排名。
 
-2. 安装依赖：
+</details>
 
-   ```bash
-   npm install
-   ```
+<details>
+  <summary><h2>🚀 安装</h2></summary>
 
-3. 配置 Docker：
+  1. 克隆仓库：
 
-   - 确保您的计算机上已安装并运行 Docker。
-   - 您可以使用 `docker-compose` 初始化所需的服务。
+     ```bash
+     git clone <仓库_URL>
+     cd trybe-futebol-clube
+     ```
 
-4. 要运行应用程序，请使用以下命令：
+  2. 安装依赖：
 
-   ```bash
-   cd app
-   docker-compose up --build
-   ```
+     ```bash
+     npm install
+     ```
 
-   应用程序将在 `APP_PORT` 环境变量指定的端口上启动，默认情况下为 3001。
+  3. 配置 Docker：
 
-## 其他项目
+     - 确保 Docker 已安装并在您的计算机上运行。
+     - 您可以使用 `docker-compose` 来初始化所需的服务。
 
-- 🌶️ [食谱应用](https://github.com/SamuelRocha91/ProjectRecipesApp/blob/main/README_ch.md)
-- 🐣 [宝可梦图鉴](https://github.com/SamuelRocha91/pokedex/blob/main/README_ch.md)
-- 🏪 [前端在线商店](https://github.com/SamuelRocha91/project-frontend-online-store/blob/main/README_ch.md)
-- 👛 [费用管理器](https://github.com/SamuelRocha91/project-trybewallet/blob/main/README_ch.md)
-- 🎮 [问答游戏](https://github.com/SamuelRocha91/trivia_game/blob/main/README_ch.md)
-- 🗡️ [Trybe Smith](https://github.com/SamuelRocha91/TrybeSmith/blob/main/README_ch.md)
-- 🪧 [博客 API](https://github.com/SamuelRocha91/BlogsApi/blob/main/README_ch.md)
-- 🐉 [Trybers 和 Dragons](https://github.com/SamuelRocha91/trybeAndDragons/blob/main/README_ch.md)
+  4. 要运行应用程序，请使用以下命令：
+
+     ```bash
+     cd app
+     docker-compose up --build
+     ```
+
+     应用程序将在环境变量 `APP_PORT` 指定的端口上启动，默认为 3001。
+
+</details>
+
+<details>
+  <summary><h2>🔗 相关仓库</h2></summary>
+
+  - 🗡️ [Trybe Smith](https://github.com/SamuelRocha91/TrybeSmith/blob/main/README_ch.md)
+  - 🪧 [Blogs Api](https://github.com/SamuelRocha91/BlogsApi/blob/main/README_ch.md)
+  - 🐉 [Trybers and Dragons](https://github.com/SamuelRocha91/trybeAndDragons/blob/main/README_ch.md)
+
+</details>

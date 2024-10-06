@@ -1,85 +1,97 @@
-# <img src="https://agenciars.com.br/wp-content/uploads/2022/06/Trybe.png" alt="Trybe Logo" width="52" height="30" /> Trybe Fútbol Club
-<img src="https://agenciars.com.br/wp-content/uploads/2022/06/Trybe.png" alt="Trybe Logo" width="52" height="30" />
+# <img src="https://cdn-icons-png.flaticon.com/128/5968/5968322.png" alt="Node Logo" width="52" height="30" /> Trybe Futebol Clube <img src="https://cdn-icons-png.flaticon.com/128/5968/5968322.png" alt="Node Logo" width="52" height="30" />
 
 ## 🌐 [![Português](https://img.shields.io/badge/Português-green)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README.md) [![Español](https://img.shields.io/badge/Español-yellow)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_es.md) [![English](https://img.shields.io/badge/English-blue)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_en.md) [![Русский](https://img.shields.io/badge/Русский-lightgrey)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_ru.md) [![中文](https://img.shields.io/badge/中文-red)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_ch.md) [![العربية](https://img.shields.io/badge/العربية-orange)](https://github.com/SamuelRocha91/trybeFutebolClube/blob/main/README_ar.md)
 
 ![Vista previa de la aplicación](./capturaEnpoint.png)
 
-## Descripción
+<details>
+  <summary><h2>📄 Descripción</h2></summary>
 
-**Trybe Fútbol Club** es una aplicación de gestión de juegos de fútbol desarrollada como parte del módulo de Backend del curso de Desarrollo Web de Trybe. Este proyecto permite a los usuarios gestionar partidos, equipos y clasificaciones de manera sencilla y eficiente, utilizando un backend robusto y dockerizado.
+  **Trybe Futebol Clube** es una aplicación de gestión de partidos de fútbol desarrollada como parte del módulo de Backend del curso de Desarrollo Web de Trybe. Este proyecto permite a los usuarios gestionar partidos, equipos y líderes de forma simple y eficiente, utilizando un backend robusto y dockerizado.
 
-## Funcionalidades
+</details>
 
-- **Gestión de Partidos**: Crear, actualizar y finalizar partidos en curso.
-- **Gestión de Equipos**: Registrar y manipular información sobre equipos de fútbol.
-- **Sistema de Inicio de Sesión**: Autenticación de usuarios para garantizar la seguridad e integridad de los datos.
-- **Clasificación**: Recuperar información sobre la clasificación de los equipos en un formato fácil de entender.
+<details>
+  <summary><h2>✨ Funcionalidades</h2></summary>
 
-## Tecnologías Utilizadas
+  - **Gestión de Partidos**: Creación, actualización y finalización de partidos en curso.
+  - **Gestión de Equipos**: Registro y manipulación de información sobre equipos de fútbol.
+  - **Sistema de Login**: Autenticación de usuarios para garantizar la seguridad y la integridad de los datos.
+  - **Clasificación**: Obtención de información sobre la clasificación de los equipos en un formato fácil de entender.
 
-- **Node.js**: Entorno de ejecución para JavaScript en el lado del servidor.
-- **Express**: Framework para construir APIs RESTful.
-- **Sequelize**: ORM (Mapeo Objeto-Relacional) para manipulación de bases de datos.
-- **Docker**: Para la contenedorización de la aplicación, facilitando la configuración y la gestión de dependencias.
-- **TypeScript**: Para tipado estático, aumentando la calidad y mantenibilidad del código.
+</details>
 
-## Estructura de Rutas
+<details>
+  <summary><h2>🛠️ Tecnologías Utilizadas</h2></summary>
 
-La API tiene las siguientes rutas:
+  - **Node.js**: Entorno de ejecución para JavaScript en el lado del servidor.
+  - **Express**: Framework para construir APIs RESTful.
+  - **Sequelize**: ORM (Object-Relational Mapping) para manipulación de bases de datos.
+  - **Docker**: Para la contenedorización de la aplicación, facilitando la configuración y la gestión de dependencias.
+  - **TypeScript**: Para tipado estático, aumentando la calidad y el mantenimiento del código.
 
-- **Equipos**
-  - `GET /teams`: Recupera todos los equipos.
-  - `POST /teams`: Crea un nuevo equipo.
+</details>
 
-- **Inicio de Sesión**
-  - `POST /login`: Autentica al usuario.
+<details>
+  <summary><h2>📑 Estructura de Rutas</h2></summary>
 
-- **Partidos**
-  - `GET /matches`: Recupera todos los partidos.
-  - `POST /matches`: Crea un nuevo partido.
-  - `PATCH /matches/:id`: Actualiza un partido en curso.
-  - `PATCH /matches/:id/finish`: Finaliza un partido en curso.
+  La API tiene las siguientes rutas:
 
-- **Clasificación**
-  - `GET /leaderboard`: Recupera la clasificación de los equipos.
+  - **Equipos**
+    - `GET /teams`: Recupera todos los equipos.
+    - `POST /teams`: Crea un nuevo equipo.
 
-## Instalación
+  - **Login**
+    - `POST /login`: Realiza la autenticación del usuario.
 
-1. Clona el repositorio:
+  - **Partidos**
+    - `GET /matches`: Recupera todos los partidos.
+    - `POST /matches`: Crea un nuevo partido.
+    - `PATCH /matches/:id`: Actualiza un partido en curso.
+    - `PATCH /matches/:id/finish`: Finaliza un partido en curso.
 
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd trybe-futebol-clube
-   ```
+  - **Clasificación**
+    - `GET /leaderboard`: Recupera la clasificación de los equipos.
 
-2. Instala las dependencias:
+</details>
 
-   ```bash
-   npm install
-   ```
+<details>
+  <summary><h2>🚀 Instalación</h2></summary>
 
-3. Configura Docker:
+  1. Clona el repositorio:
 
-   - Asegúrate de que Docker esté instalado y en ejecución en tu máquina.
-   - Puedes usar `docker-compose` para inicializar los servicios necesarios.
+     ```bash
+     git clone <URL_DEL_REPOSITORIO>
+     cd trybe-futebol-clube
+     ```
 
-4. Para ejecutar la aplicación, usa el comando:
+  2. Instala las dependencias:
 
-   ```bash
-   cd app
-   docker-compose up --build
-   ```
+     ```bash
+     npm install
+     ```
 
-   La aplicación se iniciará en el puerto especificado por la variable de entorno `APP_PORT`, con un valor predeterminado de 3001.
+  3. Configura Docker:
 
-## Otros Proyectos
+     - Asegúrate de que Docker esté instalado y en funcionamiento en tu máquina.
+     - Puedes usar `docker-compose` para inicializar los servicios necesarios.
 
-- 🌶️ [Recipes App](https://github.com/SamuelRocha91/ProjectRecipesApp/blob/main/README_es.md)
-- 🐣 [Pokedex](https://github.com/SamuelRocha91/pokedex/blob/main/README_es.md)
-- 🏪 [FrontEnd Online Store](https://github.com/SamuelRocha91/project-frontend-online-store/blob/main/README_es.md)
-- 👛 [Expense Organizer](https://github.com/SamuelRocha91/project-trybewallet/blob/main/README_es.md)
-- 🎮 [Trivia Game](https://github.com/SamuelRocha91/trivia_game/blob/main/README_es.md)
-- 🗡️ [Trybe Smith](https://github.com/SamuelRocha91/TrybeSmith/blob/main/README_es.md)
-- 🪧 [Blogs API](https://github.com/SamuelRocha91/BlogsApi/blob/main/README_es.md)
-- 🐉 [Trybers and Dragons](https://github.com/SamuelRocha91/trybeAndDragons/blob/main/README_es.md)
+  4. Para ejecutar la aplicación, usa el comando:
+
+     ```bash
+     cd app
+     docker-compose up --build
+     ```
+
+     La aplicación se iniciará en el puerto especificado por la variable de entorno `APP_PORT`, con un valor predeterminado de 3001.
+
+</details>
+
+<details>
+  <summary><h2>🔗 Repositorios Relacionados</h2></summary>
+
+  - 🗡️ [Trybe Smith](https://github.com/SamuelRocha91/TrybeSmith/blob/main/README_es.md)
+  - 🪧 [Blogs Api](https://github.com/SamuelRocha91/BlogsApi/blob/main/README_es.md)
+  - 🐉 [Trybers and Dragons](https://github.com/SamuelRocha91/trybeAndDragons/blob/main/README_es.md)
+
+</details>
